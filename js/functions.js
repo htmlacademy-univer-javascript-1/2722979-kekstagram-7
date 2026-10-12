@@ -13,3 +13,21 @@ const isPalindrome = (string) => {
 
 checkStringLength('проверяемая строка', 20);
 isPalindrome('Лёша на полке клопа нашёл ');
+
+// Переводит время в формате 'часы:минуты' в количество минут с начала суток
+const parseTimeToMinutes = (time) => {
+  const [hours, minutes] = time.split(':');
+  return Number(hours) * 60 + Number(minutes);
+};
+
+// Проверяет, укладывается ли встреча в рамки рабочего дня
+const isMeetingWithinWorkday = (dayStart, dayEnd, meetingStart, duration) => {
+  const dayStartInMinutes = parseTimeToMinutes(dayStart);
+  const dayEndInMinutes = parseTimeToMinutes(dayEnd);
+  const meetingStartInMinutes = parseTimeToMinutes(meetingStart);
+
+  return meetingStartInMinutes >= dayStartInMinutes
+    && meetingStartInMinutes + duration <= dayEndInMinutes;
+};
+
+isMeetingWithinWorkday('08:00', '17:30', '14:00', 90);
